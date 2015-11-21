@@ -4,7 +4,9 @@
 <p class="todo_list_sub_title"><%= @todo_list.description %></p>
 
 <div id="todo_items_wrapper">
-  <%= render @todo_list.todo_items %>
+ <div id="items_1">
+  <%= render @todo_list.todo_items.order('created_at ASC') %>
+  </div>
   <div id="form">
     <%= render 'todo_items/form' %>
   </div>

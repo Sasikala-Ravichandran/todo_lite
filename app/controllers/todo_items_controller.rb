@@ -10,7 +10,11 @@ end
 def create
 	@todo_item = @todo_list.todo_items.build(todo_items_params)
 	if @todo_item.save
-       redirect_to @todo_list, notice: "Successfully an item created"
+       flash[:notice] = "Successfully an item created"
+    respond_to do |format|
+      format.html { redirect_to @todo_list }
+      format.js
+    end
 	else
        render 'new', error: "Not created an item"
 	end
@@ -25,12 +29,26 @@ end
 
 def destroy
 	@todo_item.destroy
-	redirect_to @todo_list
+  respond_to do |format|
+      format.html { redirect_to @todo_list }
+      format.js
+  end
+
 end
 
 def complete
-   @todo_item.update_attribute(:completed_at, Time.now)
-   redirect_to @todo_list, notice: "Todo item completed"
+   unless @todo_item.completed?
+      flash[:notice] = "Todo item completed"
+      @todo_item.update_attribute(:completed_at, Time.now)
+    else 
+      flash[:notice] = "Marked as not completed"
+      @todo_item.update_attribute(:completed_at, nil)
+    end 
+
+    respond_to do |format|
+      format.html { redirect_to @todo_list }
+      format.js
+   end
 end
 
 private
