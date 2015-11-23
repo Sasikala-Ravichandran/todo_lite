@@ -6,6 +6,9 @@ class TodoListsController < ApplicationController
   end
  
   def show
+   if request.path != todo_list_path(@todo_list)
+      redirect_to @todo_list, :status => :moved_permanently
+    end
   end
  
   def new
@@ -27,11 +30,10 @@ class TodoListsController < ApplicationController
         format.json { render json: @todo_list.errors, status: :unprocessable_entity }
       end
     end
-  end
+  end 
 
-  # PATCH/PUT /todo_lists/1
-  # PATCH/PUT /todo_lists/1.json
   def update
+    @todo_list.slug = nil
     respond_to do |format|
       if @todo_list.update(todo_list_params)
         format.html { redirect_to @todo_list, notice: 'Todo list was successfully updated.' }
@@ -42,9 +44,7 @@ class TodoListsController < ApplicationController
       end
     end
   end
-
-  # DELETE /todo_lists/1
-  # DELETE /todo_lists/1.json
+ 
   def destroy
     @todo_list.destroy
     respond_to do |format|
@@ -56,7 +56,7 @@ class TodoListsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_todo_list
-      @todo_list = TodoList.find(params[:id])
+      @todo_list = TodoList.friendly.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
