@@ -1,26 +1,26 @@
 class TodoListsController < ApplicationController
+
   before_action :set_todo_list, only: [:show, :edit, :update, :destroy]
- 
+
   def index
     @todo_lists = TodoList.all
   end
- 
+
   def show
-   if request.path != todo_list_path(@todo_list)
+    if request.path != todo_list_path(@todo_list)
       redirect_to @todo_list, :status => :moved_permanently
     end
   end
- 
+
   def new
     @todo_list = TodoList.new
   end
- 
+
   def edit
   end
- 
+
   def create
     @todo_list = TodoList.new(todo_list_params)
-
     respond_to do |format|
       if @todo_list.save
         format.html { redirect_to @todo_list, notice: 'Todo list was successfully created.' }
@@ -30,7 +30,7 @@ class TodoListsController < ApplicationController
         format.json { render json: @todo_list.errors, status: :unprocessable_entity }
       end
     end
-  end 
+  end
 
   def update
     @todo_list.slug = nil
@@ -44,7 +44,7 @@ class TodoListsController < ApplicationController
       end
     end
   end
- 
+
   def destroy
     @todo_list.destroy
     respond_to do |format|

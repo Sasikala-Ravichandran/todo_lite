@@ -1,7 +1,7 @@
 <div class="rows clearfix">
-	 <div class="complete">
+	<div class="complete">
 		<%= link_to complete_todo_list_todo_item_path(@todo_list, todo_item.id), method: :patch, remote: true do %>
-	  		<i id="mark_<%= todo_item.id%>" class="fa fa-check <%= todo_item.completed? ? "opac" : " " %>" ></i>
+			<i id="mark_<%= todo_item.id%>" class="fa fa-check <%= todo_item.completed? ? "opac" : " " %>" ></i>
 		<% end %>
 	</div>
 	<div class="todo_item">
@@ -12,5 +12,4 @@
 			<i class="fa fa-trash" id ="trash_can"></i>
 		<% end %>
 	</div>
-	 
 </div>

@@ -2,11 +2,10 @@
   <% if @todo_list.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@todo_list.errors.count, "error") %> prohibited this todo_list from being saved:</h2>
-
       <ul>
-      <% @todo_list.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
+        <% @todo_list.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
       </ul>
     </div>
   <% end %>
@@ -14,9 +13,11 @@
   <div class="field">
     <%= f.input :title %>
   </div>
+
   <div class="field">
-     <%= f.input :description, as: :text %>
+    <%= f.input :description, as: :text %>
   </div>
+
   <div class="actions">
     <%= f.button :submit %>
   </div>

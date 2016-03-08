@@ -1,17 +1,14 @@
 <p id="notice"><%= notice %></p>
-
 <h2 class="todo_list_title"><%= @todo_list.title %></h2>
 <p class="todo_list_sub_title"><%= @todo_list.description %></p>
-
 <div id="todo_items_wrapper">
- <div id="items_1">
-  <%= render @todo_list.todo_items.order('created_at ASC') %>
+  <div id="items_1">
+    <%= render @todo_list.todo_items.order('created_at ASC') %>
   </div>
   <div id="form">
     <%= render 'todo_items/form' %>
   </div>
 </div>
-
 <div class="links"> 
   <%= link_to 'Edit', edit_todo_list_path(@todo_list) %> |
   <%= link_to 'Delete', todo_list_path(@todo_list), method: :delete, data: {confirm: "Are you sure?"} %> | 
